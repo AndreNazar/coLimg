@@ -1,4 +1,4 @@
-const a: string = "hello"
+const a: string = "hello BROO!!!"
 
 const b = () => {
   console.log(a)
