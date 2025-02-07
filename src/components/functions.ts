@@ -1,4 +1,4 @@
-import { canvas, deleteBlock, formContainer, outputColors, outputImg, textForm, upIcon } from "./elements"
+import { deleteBlock, formContainer, outputColors, outputImg, textForm, upIcon } from "./elements"
 import KMeans from "./KMeans"
 import { IDropzone } from "./types"
 
@@ -35,6 +35,7 @@ export const dropHandler = (files: FileList) => {
 
 function imageHandler(img: HTMLImageElement) {
   return function () {
+    const canvas = document.createElement("canvas")
     const ctx = canvas.getContext("2d")
     const kmeans = new KMeans()
     let pixels = []
@@ -42,11 +43,12 @@ function imageHandler(img: HTMLImageElement) {
     let clusters: number[][][] = []
     let mainColors: number[][] = []
 
-    canvas.width = img.width
-    canvas.height = img.height
+    canvas.width = img.naturalWidth
+    canvas.height = img.naturalHeight
 
-    ctx.drawImage(img, 0, 0) // отрисовка изображения в canvas, который не видно во время кластеризации
-    pixelData = ctx.getImageData(0, 0, img.width, img.height).data // получение пиксельных данных
+
+    ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight) // отрисовка изображения в canvas, который не видно во время кластеризации
+    pixelData = ctx.getImageData(0, 0, img.naturalWidth, img.naturalHeight).data // получение пиксельных данных
 
     for (var i = 0; i < pixelData.length; i += 4) pixels.push([pixelData[i], pixelData[i + 1], pixelData[i + 2]]) // создание массива точек
 
