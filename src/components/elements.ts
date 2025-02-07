@@ -7,4 +7,3 @@ export const formContainer: HTMLElement =
 export const formBlock: HTMLInputElement = document.querySelector(".form input")
 export const textForm: HTMLElement = document.querySelector(".form .text")
 export const upIcon: HTMLElement = document.querySelector(".up-icon")
-export const canvas = document.createElement("canvas")
